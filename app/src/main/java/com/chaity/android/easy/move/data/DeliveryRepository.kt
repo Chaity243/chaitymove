@@ -17,7 +17,6 @@
 package com.chaity.android.easy.move.data
 
 import androidx.paging.LivePagedListBuilder
-import android.util.Log
 import com.chaity.android.easy.move.api.DeliveryService
 import com.chaity.android.easy.move.db.DeliveryLocalCache
 import com.chaity.android.easy.move.model.DeliveriesResult
@@ -31,13 +30,15 @@ class DeliveryRepository(
 ) {
 
     /**
+     * get all deliveries or
      * Search repositories whose names match the query.
+     * we can pass query parameter as an extension to code for including search functionality
      */
-    fun search(): DeliveriesResult {
+    fun getDeliveries(): DeliveriesResult {
 
 
         // Get data source factory from the local cache
-        val dataSourceFactory = cache.reposByName()
+        val dataSourceFactory = cache.getAllDeliveries()
 
         // every new query creates a new BoundaryCallback
         // The BoundaryCallback will observe when the user reaches to the edges of

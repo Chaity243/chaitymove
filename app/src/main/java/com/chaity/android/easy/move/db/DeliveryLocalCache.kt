@@ -47,7 +47,7 @@ class DeliveryLocalCache(
      * any characters between the words.
      * @param name repository name
      */
-    fun reposByName(): DataSource.Factory<Int, Deliveries> {
+    fun getAllDeliveries(): DataSource.Factory<Int, Deliveries> {
 
         return deliveryDao.getAllDeliveries()
     }

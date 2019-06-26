@@ -51,8 +51,8 @@ class DeliveriesActivity : AppCompatActivity() {
 
         initAdapter()
         val query = savedInstanceState?.getString(LAST_SEARCH_QUERY) ?: DEFAULT_QUERY
-        viewModel.searchRepo(query)
-        initSearch(query)
+      /*  viewModel.searchRepo(query)
+        initSearch(query)*/
     }
 
   /*  override fun onSaveInstanceState(outState: Bundle) {
@@ -71,7 +71,7 @@ class DeliveriesActivity : AppCompatActivity() {
             Toast.makeText(this, "\uD83D\uDE28 Wooops $it", Toast.LENGTH_LONG).show()
         })
     }
-
+/*
     private fun initSearch(query: String) {
         search_repo.setText(query)
 
@@ -101,7 +101,7 @@ class DeliveriesActivity : AppCompatActivity() {
                 adapter.submitList(null)
             }
         }
-    }
+    }*/
 
     private fun showEmptyList(show: Boolean) {
         if (show) {

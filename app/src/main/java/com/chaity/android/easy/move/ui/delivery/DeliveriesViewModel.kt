@@ -31,22 +31,30 @@ import com.chaity.android.easy.move.model.DeliveriesResult
  */
 class DeliveriesViewModel(private val repository: DeliveryRepository) : ViewModel() {
 
-    private val queryLiveData = MutableLiveData<String>()
-    private val repoResult: LiveData<DeliveriesResult> = Transformations.map(queryLiveData) {
-        repository.search()
-    }
+    private val repoResult = MutableLiveData<DeliveriesResult>()
+    val repos: LiveData<PagedList<Deliveries>>
+    val networkErrors: LiveData<String>
 
-    val repos: LiveData<PagedList<Deliveries>> = Transformations.switchMap(repoResult) { it -> it.data }
-    val networkErrors: LiveData<String> = Transformations.switchMap(repoResult) { it ->
-        it.networkErrors
+    /* private val repoResult: LiveData<DeliveriesResult> = Transformations.map(queryLiveData) {
+
+     }*/
+
+
+
+    init {
+        repoResult.postValue( repository.getDeliveries())
+        repos  = Transformations.switchMap(repoResult) { it -> it.data }
+        networkErrors=Transformations.switchMap(repoResult) { it ->
+            it.networkErrors
+        }
     }
 
     /**
      * Search a repository based on a query string.
      */
-    fun searchRepo(queryString: String) {
+    /*fun searchRepo(queryString: String) {
         queryLiveData.postValue(queryString)
-    }
+    }*/
 /*
     *//**
      * Get the last query value.

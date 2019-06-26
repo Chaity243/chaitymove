@@ -25,7 +25,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
-
+        val ab = supportActionBar
+        ab!!.setHomeButtonEnabled(true)
+        ab.setDisplayHomeAsUpEnabled(true)
         getIntentData()
 
         // get the view model
@@ -49,6 +51,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             mMap.addMarker(MarkerOptions().position(sydney).title(deliveryItem.description))
             mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
 
+            //To just change the zoom value to any desired value between minimum value=2.0 and maximum value=21.0.
+            //
+            //The API warns that not all locations have tiles at values at or near maximum zoom.
+            mMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
+
 
         })
 
@@ -66,6 +73,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun getIntentData() {
         id = intent.extras.getInt("id")
 
+    }
+
+
+    // Support Action Bar Back navigation
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
     }
 
 
