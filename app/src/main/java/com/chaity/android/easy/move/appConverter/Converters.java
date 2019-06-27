@@ -1,4 +1,4 @@
-package com.chaity.android.easy.move.AppConverter;
+package com.chaity.android.easy.move.appConverter;
 
 import androidx.room.TypeConverter;
 

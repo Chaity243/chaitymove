@@ -28,6 +28,14 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+
+
+        /** The base URL of the API */
+        buildConfigField "String", "BASE_URL", "\"https://mock-api-mobile.dev.lalamove.com\""
+
+
+
     }
 
 
@@ -39,6 +47,8 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+
         }
     }
 }

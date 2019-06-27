@@ -21,7 +21,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import android.content.Context
 import androidx.room.TypeConverters
-import com.chaity.android.easy.move.AppConverter.Converters
+import com.chaity.android.easy.move.appConverter.Converters
 import com.chaity.android.easy.move.model.Deliveries
 
 /**

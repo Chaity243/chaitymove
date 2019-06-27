@@ -38,6 +38,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             deliveryItem=it
 
 
+
+
+
             tv_del.text=deliveryItem.description
             Picasso.get()
                     .load(deliveryItem.imageUrl)

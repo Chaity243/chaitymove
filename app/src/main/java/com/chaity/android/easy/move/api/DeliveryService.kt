@@ -18,22 +18,17 @@ package com.chaity.android.easy.move.api
 
 import android.util.Log
 import com.chaity.android.easy.move.model.Deliveries
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import okhttp3.logging.HttpLoggingInterceptor.Level
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 private const val TAG = "DeliveryService"
-private const val IN_QUALIFIER = "in:name,description"
+
 
 /**
- * Search repos based on a query.
+ * get delivery list
  * Trigger a request to the Github searchRepo API with the following params:
  * @param query searchRepo keyword
  * @param page request page index
@@ -78,11 +73,11 @@ fun searchRepos(
 }
 
 /**
- * Github API communication setup via Retrofit.
+ * get delivery list  API communication setup via Retrofit.
  */
 interface DeliveryService {
     /**
-     * Get repos ordered by stars.
+     * Get delivery list
      */
     @GET("/deliveries")
     fun searchRepos(
@@ -91,22 +86,5 @@ interface DeliveryService {
 
     ): Call<List<Deliveries>>
 
-  /*  companion object {
-        private const val BASE_URL = "https://mock-api-mobile.dev.lalamove.com"
 
-        fun create(): DeliveryService {
-            val logger = HttpLoggingInterceptor()
-            logger.level = Level.BASIC
-
-            val client = OkHttpClient.Builder()
-                    .addInterceptor(logger)
-                    .build()
-            return Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .client(client)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-                    .create(DeliveryService::class.java)
-        }
-    }*/
 }
