@@ -40,7 +40,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             tv_del.text=deliveryItem.description
             Picasso.get()
-                    .load(deliveryItem!!.imageUrl)
+                    .load(deliveryItem.imageUrl)
                     .placeholder(R.drawable.ic_launcher_foreground)
                     .error(R.drawable.ic_eye)
                     .fit()

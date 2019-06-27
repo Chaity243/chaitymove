@@ -31,7 +31,7 @@ class HorizonMainApplication : DaggerApplication() {
     companion object {
 
         @get:Synchronized
-        val instance: HorizonMainApplication? = null
+        lateinit var instance: HorizonMainApplication
         private val TAG = HorizonMainApplication::class.java.simpleName
     }
 

@@ -3,7 +3,7 @@ package com.chaity.android.easy.move.utils;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-public class ViewModelProviderFactory <V> implements ViewModelProvider.Factory {
+public class ViewModelProviderFactory<V> implements ViewModelProvider.Factory {
     private V viewModel;
 
     public ViewModelProviderFactory(V viewModel) {
