@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2018 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.chaity.android.easy.move.ui.delivery
 
 import android.os.Bundle
@@ -33,6 +17,15 @@ import kotlinx.android.synthetic.main.activity_delivery.*
 import javax.inject.Inject
 
 class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(){
+
+    @Inject lateinit  var factory: ViewModelProvider.Factory
+    @Inject lateinit var adapter:DeliveryAdapter
+
+    private var viewModel: DeliveriesViewModel? = null
+
+
+
+
     override fun getViewModel(): DeliveriesViewModel {
         // get the view model
         viewModel = ViewModelProviders.of(this, factory)
@@ -41,12 +34,7 @@ class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(){
         return viewModel as DeliveriesViewModel
     }
 
-    @Inject lateinit  var factory: ViewModelProvider.Factory
 
-    private var viewModel: DeliveriesViewModel? = null
-
-
-    @Inject lateinit var adapter:DeliveryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,15 +48,10 @@ class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(){
         list.addItemDecoration(decoration)
 
         initAdapter()
-        val query = savedInstanceState?.getString(LAST_SEARCH_QUERY) ?: DEFAULT_QUERY
-        /*  viewModel.searchRepo(query)
-          initSearch(query)*/
+
     }
 
-    /*  override fun onSaveInstanceState(outState: Bundle) {
-          super.onSaveInstanceState(outState)
-          outState.putString(LAST_SEARCH_QUERY, viewModel.lastQueryValue())
-      }*/
+
 
     private fun initAdapter() {
         list.adapter = adapter
@@ -81,37 +64,6 @@ class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(){
             Toast.makeText(this, "\uD83D\uDE28 Wooops $it", Toast.LENGTH_LONG).show()
         })
     }
-/*
-    private fun initSearch(query: String) {
-        search_repo.setText(query)
-
-        search_repo.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_GO) {
-                updateRepoListFromInput()
-                true
-            } else {
-                false
-            }
-        }
-        search_repo.setOnKeyListener { _, keyCode, event ->
-            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                updateRepoListFromInput()
-                true
-            } else {
-                false
-            }
-        }
-    }
-
-    private fun updateRepoListFromInput() {
-        search_repo.text.trim().let {
-            if (it.isNotEmpty()) {
-                list.scrollToPosition(0)
-                viewModel.searchRepo(it.toString())
-                adapter.submitList(null)
-            }
-        }
-    }*/
 
     private fun showEmptyList(show: Boolean) {
         if (show) {
@@ -123,8 +75,4 @@ class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(){
         }
     }
 
-    companion object {
-        private const val LAST_SEARCH_QUERY: String = "last_search_query"
-        private const val DEFAULT_QUERY = "Delivery"
-    }
 }
