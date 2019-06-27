@@ -24,12 +24,13 @@ import androidx.paging.PagedList
 import com.chaity.android.easy.move.model.Deliveries
 import com.chaity.android.easy.move.data.DeliveryRepository
 import com.chaity.android.easy.move.model.DeliveriesResult
+import javax.inject.Inject
 
 /**
  * ViewModel for the [DeliveriesActivity] screen.
  * The ViewModel works with the [DeliveryRepository] to get the data.
  */
-class DeliveriesViewModel(private val repository: DeliveryRepository) : ViewModel() {
+class DeliveriesViewModel @Inject constructor (private val repository: DeliveryRepository) : ViewModel() {
 
     private val repoResult = MutableLiveData<DeliveriesResult>()
     val repos: LiveData<PagedList<Deliveries>>

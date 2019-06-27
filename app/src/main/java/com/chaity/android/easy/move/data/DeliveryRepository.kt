@@ -20,11 +20,12 @@ import androidx.paging.LivePagedListBuilder
 import com.chaity.android.easy.move.api.DeliveryService
 import com.chaity.android.easy.move.db.DeliveryLocalCache
 import com.chaity.android.easy.move.model.DeliveriesResult
+import javax.inject.Inject
 
 /**
  * Repository class that works with local and remote data sources.
  */
-class DeliveryRepository(
+class DeliveryRepository   @Inject constructor (
         private val service: DeliveryService,
         private val cache: DeliveryLocalCache
 ) {

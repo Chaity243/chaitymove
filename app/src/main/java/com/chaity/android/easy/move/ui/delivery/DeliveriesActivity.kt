@@ -18,32 +18,42 @@ package com.chaity.android.easy.move.ui.delivery
 
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.chaity.android.easy.move.Injection
 import com.chaity.android.easy.move.R
 import com.chaity.android.easy.move.model.Deliveries
+import com.chaity.android.easy.move.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_delivery.*
+import javax.inject.Inject
 
-class DeliveriesActivity : AppCompatActivity() {
+class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(){
+    override fun getViewModel(): DeliveriesViewModel {
+        // get the view model
+        viewModel = ViewModelProviders.of(this, factory)
+                .get(DeliveriesViewModel::class.java)
 
-    private lateinit var viewModel: DeliveriesViewModel
-    private val adapter = DeliveryAdapter()
+        return viewModel as DeliveriesViewModel
+    }
+
+    @Inject lateinit  var factory: ViewModelProvider.Factory
+
+    private var viewModel: DeliveriesViewModel? = null
+
+
+    @Inject lateinit var adapter:DeliveryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_delivery)
 
         // get the view model
-        viewModel = ViewModelProviders.of(this, Injection.provideViewModelFactory(this))
-                .get(DeliveriesViewModel::class.java)
+        getViewModel()
 
         // add dividers between RecyclerView's row items
         val decoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
@@ -51,23 +61,23 @@ class DeliveriesActivity : AppCompatActivity() {
 
         initAdapter()
         val query = savedInstanceState?.getString(LAST_SEARCH_QUERY) ?: DEFAULT_QUERY
-      /*  viewModel.searchRepo(query)
-        initSearch(query)*/
+        /*  viewModel.searchRepo(query)
+          initSearch(query)*/
     }
 
-  /*  override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putString(LAST_SEARCH_QUERY, viewModel.lastQueryValue())
-    }*/
+    /*  override fun onSaveInstanceState(outState: Bundle) {
+          super.onSaveInstanceState(outState)
+          outState.putString(LAST_SEARCH_QUERY, viewModel.lastQueryValue())
+      }*/
 
     private fun initAdapter() {
         list.adapter = adapter
-        viewModel.repos.observe(this, Observer<PagedList<Deliveries>> {
+        viewModel?.repos?.observe(this, Observer<PagedList<Deliveries>> {
             Log.d("Activity", "list: ${it?.size}")
             showEmptyList(it?.size == 0)
-            adapter.submitList(it)
+            adapter?.submitList(it)
         })
-        viewModel.networkErrors.observe(this, Observer<String> {
+        viewModel?.networkErrors?.observe(this, Observer<String> {
             Toast.makeText(this, "\uD83D\uDE28 Wooops $it", Toast.LENGTH_LONG).show()
         })
     }

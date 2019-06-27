@@ -20,12 +20,14 @@ import android.util.Log
 import androidx.paging.DataSource
 import com.chaity.android.easy.move.model.Deliveries
 import java.util.concurrent.Executor
+import javax.inject.Inject
 
 /**
  * Class that handles the DAO local data source. This ensures that methods are triggered on the
  * correct executor.
  */
-class DeliveryLocalCache(
+
+class DeliveryLocalCache  @Inject constructor (
         private val deliveryDao: DeliveryDao,
         private val ioExecutor: Executor
 ) {

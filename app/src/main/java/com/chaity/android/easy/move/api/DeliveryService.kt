@@ -87,11 +87,11 @@ interface DeliveryService {
     @GET("/deliveries")
     fun searchRepos(
             @Query("offset") lastRequestedPage: Int,
-        @Query("limit") itemsPerPage: Int
+            @Query("limit") itemsPerPage: Int
 
     ): Call<List<Deliveries>>
 
-    companion object {
+  /*  companion object {
         private const val BASE_URL = "https://mock-api-mobile.dev.lalamove.com"
 
         fun create(): DeliveryService {
@@ -108,5 +108,5 @@ interface DeliveryService {
                     .build()
                     .create(DeliveryService::class.java)
         }
-    }
+    }*/
 }

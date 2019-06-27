@@ -53,7 +53,7 @@ ext {
     pagingVersion = '2.1.0-alpha01'
     retrofitVersion = "2.3.0"
     okhttpLoggingInterceptorVersion = "3.9.0"
-
+    dagger_version = '2.14.1'
     runnerVersion = '1.1.0-alpha4'
     rulesVersion = "1.0.1"
     junitVersion = "4.12"
