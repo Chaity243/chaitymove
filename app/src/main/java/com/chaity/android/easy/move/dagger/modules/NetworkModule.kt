@@ -3,10 +3,10 @@ package com.chaity.android.easy.move.dagger.modules
 
 import com.chaity.android.easy.move.BuildConfig
 import com.chaity.android.easy.move.api.DeliveryService
-import com.chaity.android.easy.move.extension.BASE_URL
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -14,13 +14,27 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
 
+
     @Singleton
     @Provides
-    internal fun providesClient(): OkHttpClient {
-        return OkHttpClient.Builder()
-                .build()
+    internal fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
+    }
+
+
+
+    @Singleton
+    @Provides
+    internal fun providesClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+        return OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build()
 
     }
+
+
+
+
+
+
 
     @Singleton
     @Provides

@@ -17,11 +17,6 @@ class MyApp : DaggerApplication() {
         return DaggerDeliveryMainComponent.builder().create(this)
     }
 
-    companion object {
 
-        @get:Synchronized
-        lateinit var instance: MyApp
-        private val TAG = MyApp::class.java.simpleName
-    }
 
 }

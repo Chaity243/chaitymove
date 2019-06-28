@@ -24,20 +24,4 @@ abstract class DeliveryDatabase : RoomDatabase() {
 
     abstract fun deliveryDao(): DeliveryDao
 
-    companion object {
-
-        @Volatile
-        private var INSTANCE: DeliveryDatabase? = null
-
-        fun getInstance(context: Context): DeliveryDatabase =
-                INSTANCE ?: synchronized(this) {
-                    INSTANCE
-                            ?: buildDatabase(context).also { INSTANCE = it }
-                }
-
-        private fun buildDatabase(context: Context) =
-                Room.databaseBuilder(context.applicationContext,
-                        DeliveryDatabase::class.java, "Delivery.db")
-                        .build()
-    }
 }
