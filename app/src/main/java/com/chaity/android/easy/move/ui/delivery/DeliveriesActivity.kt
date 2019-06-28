@@ -59,7 +59,7 @@ class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(){
         // get the view model
         getViewModel()
 
-        setupListUpdate()
+
 
     }
 

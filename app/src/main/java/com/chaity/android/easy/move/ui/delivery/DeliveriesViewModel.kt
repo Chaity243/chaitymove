@@ -22,10 +22,6 @@ class DeliveriesViewModel @Inject constructor (private val repository: DeliveryR
     val repos: LiveData<PagedList<Deliveries>>
     val networkErrors: LiveData<String>
 
-    /* private val repoResult: LiveData<DeliveriesResult> = Transformations.map(queryLiveData) {
-
-     }*/
-
 
 
     init {
@@ -36,15 +32,5 @@ class DeliveriesViewModel @Inject constructor (private val repository: DeliveryR
         }
     }
 
-    /**
-     * Search a repository based on a query string.
-     */
-    /*fun searchRepo(queryString: String) {
-        queryLiveData.postValue(queryString)
-    }*/
-/*
-    *//**
-     * Get the last query value.
-     *//*
-    fun lastQueryValue(): String? = queryLiveData.value*/
+
 }

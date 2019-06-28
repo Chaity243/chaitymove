@@ -21,9 +21,7 @@ interface DeliveryDao  {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(posts: List<Deliveries>)
 
-    // Do a similar query as the search API:
-    // Look for repos that contain the query string in the name or in the description
-    // and order those results descending, by the number of stars and then by name
+  // Get All Deliveries
     @Query("SELECT * FROM Deliveries ")
     fun getAllDeliveries(): DataSource.Factory<Int, Deliveries>
 

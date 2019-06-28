@@ -11,7 +11,7 @@ import com.chaity.android.easy.move.appConverter.Converters
 import com.chaity.android.easy.move.model.Deliveries
 
 /**
- * Database schema that holds the list of repos.
+ * Database schema that holds the list of deliveries
  */
 
 @TypeConverters(Converters::class)

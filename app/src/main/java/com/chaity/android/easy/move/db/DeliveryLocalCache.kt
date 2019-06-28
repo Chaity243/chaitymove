@@ -19,7 +19,7 @@ class DeliveryLocalCache  @Inject constructor (
 ) {
 
     /**
-     * Insert a list of repos in the database, on a background thread.
+     * Insert a list of deliveries in the database, on a background thread.
      */
     fun insert(repos: List<Deliveries>, insertFinished: () -> Unit) {
         ioExecutor.execute {
@@ -30,10 +30,7 @@ class DeliveryLocalCache  @Inject constructor (
     }
 
     /**
-     * Request a LiveData<List<Repo>> from the Dao, based on a repo name. If the name contains
-     * multiple words separated by spaces, then we're emulating the GitHub API behavior and allow
-     * any characters between the words.
-     * @param name repository name
+     * Request a LiveData<List<Delivery>> from the Dao.
      */
     fun getAllDeliveries(): DataSource.Factory<Int, Deliveries> {
 
