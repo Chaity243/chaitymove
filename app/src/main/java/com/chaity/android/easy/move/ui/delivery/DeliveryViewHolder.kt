@@ -13,6 +13,7 @@ import android.widget.TextView
 import com.chaity.android.easy.move.R
 import com.chaity.android.easy.move.model.Deliveries
 import com.chaity.android.easy.move.ui.map.MapsActivity
+import com.chaity.android.easy.move.utils.Constants.BUNDLE_KEY_DELIVERY
 import com.squareup.picasso.Picasso
 
 /**
@@ -28,7 +29,7 @@ class DeliveryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     init {
         view.setOnClickListener {
             deliveries?.let { delivery ->
-                val intent = Intent(view.context,MapsActivity::class.java).putExtra("id",delivery.id)
+                val intent = Intent(view.context,MapsActivity::class.java).putExtra(BUNDLE_KEY_DELIVERY,delivery)
                 view.context.startActivity(intent)
             }
         }

@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.chaity.android.easy.move.R
 import com.chaity.android.easy.move.model.Deliveries
+import com.chaity.android.easy.move.utils.Constants.BUNDLE_KEY_DELIVERY
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -18,7 +19,6 @@ import kotlinx.android.synthetic.main.delivery_view_item.*
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-    private var id: Int? = null
     private lateinit var viewModel: MapsViewModel
     private lateinit var deliveryItem: Deliveries
 
@@ -29,38 +29,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         ab!!.setHomeButtonEnabled(true)
         ab.setDisplayHomeAsUpEnabled(true)
         getIntentData()
-
-        // get the view model
-        viewModel = ViewModelProviders.of(this, id?.let { MapsViewModelFactory(application, it) })
-                .get(MapsViewModel::class.java)
-
-        viewModel.deliveryItem.observe(this, Observer{
-            deliveryItem=it
-
-
-
-
-
-            tv_del.text=deliveryItem.description
-            Picasso.get()
-                    .load(deliveryItem.imageUrl)
-                    .placeholder(R.drawable.ic_launcher_foreground)
-                    .error(R.drawable.ic_eye)
-                    .fit()
-                    .into(iv_del)
-
-            // Add a marker in Sydney and move the camera
-            val sydney = LatLng(deliveryItem.location.lat,deliveryItem.location.lng)
-            mMap.addMarker(MarkerOptions().position(sydney).title(deliveryItem.description))
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-
-            //To just change the zoom value to any desired value between minimum value=2.0 and maximum value=21.0.
-            //
-            //The API warns that not all locations have tiles at values at or near maximum zoom.
-            mMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
-
-
-        })
 
 
 
@@ -74,7 +42,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun getIntentData() {
-        id = intent.extras.getInt("id")
+        deliveryItem = intent.extras.getParcelable<Deliveries>(BUNDLE_KEY_DELIVERY)
 
     }
 
@@ -98,9 +66,23 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-      /*  // Add a marker in Sydney and move the camera
+
+        tv_del.text=deliveryItem.description
+        Picasso.get()
+                .load(deliveryItem.imageUrl)
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.ic_eye)
+                .fit()
+                .into(iv_del)
+
+        // Add a marker using specified lat lang  and move the camera
         val sydney = LatLng(deliveryItem.location.lat,deliveryItem.location.lng)
         mMap.addMarker(MarkerOptions().position(sydney).title(deliveryItem.description))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))*/
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        //To just change the zoom value to any desired value between minimum value=2.0 and maximum value=21.0.
+        //
+        //The API warns that not all locations have tiles at values at or near maximum zoom.
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
     }
 }
