@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -39,9 +41,9 @@ class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_delivery)
+        setupBindings(savedInstanceState)
 
-        // get the view model
-        getViewModel()
+
 
         // add dividers between RecyclerView's row items
         val decoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
@@ -51,6 +53,15 @@ class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(){
 
     }
 
+    private fun setupBindings(savedInstanceState: Bundle?) {
+        val activityBinding = DataBindingUtil.setContentView<ViewDataBinding>(this, R.layout.activity_delivery)
+
+        // get the view model
+        getViewModel()
+
+        setupListUpdate()
+
+    }
 
 
     private fun initAdapter() {
