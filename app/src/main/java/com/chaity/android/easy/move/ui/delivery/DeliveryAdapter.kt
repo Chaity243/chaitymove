@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.chaity.android.easy.move.R
+import com.chaity.android.easy.move.databinding.DeliveryViewItemBinding
 import com.chaity.android.easy.move.model.Deliveries
 
 /**
@@ -15,18 +15,22 @@ import com.chaity.android.easy.move.model.Deliveries
  */
 class DeliveryAdapter : PagedListAdapter <Deliveries, RecyclerView.ViewHolder>(DELIVERY_COMPARATOR) {
 
+
+    lateinit var inflater: LayoutInflater
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.delivery_view_item, parent, false)
-        return DeliveryViewHolder(view)
+        inflater= LayoutInflater.from(parent.context)
 
+        var  dataBinding = DeliveryViewItemBinding.inflate(inflater, parent, false)
+        return DeliveryViewHolder(dataBinding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val repoItem = getItem(position)
         if (repoItem != null) {
-            (holder as DeliveryViewHolder).bind(repoItem)
+            var deliveryItem  =  DeliveryAdapterViewModel(repoItem.id
+                    ,repoItem.description,repoItem.imageUrl)
+            (holder as DeliveryViewHolder).bind(deliveryItem)
         }
     }
 

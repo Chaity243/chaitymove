@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.chaity.android.easy.move.R
+import com.chaity.android.easy.move.databinding.DeliveryViewItemBinding
 import com.chaity.android.easy.move.model.Deliveries
 import com.chaity.android.easy.move.ui.map.MapsActivity
 import com.chaity.android.easy.move.utils.Constants.BUNDLE_KEY_DELIVERY
@@ -19,12 +20,11 @@ import com.squareup.picasso.Picasso
 /**
  * View Holder for a [Delivery] RecyclerView list item.
  */
-class DeliveryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    private val tv_del: TextView = view.findViewById(R.id.tv_del)
-    private val iv_del: ImageView = view.findViewById(R.id.iv_del)
+class DeliveryViewHolder(deliveryViewItemBinding: DeliveryViewItemBinding) : RecyclerView.ViewHolder(deliveryViewItemBinding.root) {
+ private var deliveryViewItemBinding=deliveryViewItemBinding
 
 
-    private var deliveries: Deliveries? = null
+ /*   private var deliveries: Deliveries? = null
 
     init {
         view.setOnClickListener {
@@ -34,8 +34,8 @@ class DeliveryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             }
         }
     }
-
-    fun bind(delivery: Deliveries?) {
+*/
+  /*  fun bind(delivery: Deliveries?) {
         if (delivery == null) {
             val resources = itemView.resources
             tv_del.text = resources.getString(R.string.loading)
@@ -44,7 +44,8 @@ class DeliveryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         } else {
             showDeliveryData(delivery)
         }
-    }
+    }*/
+/*
 
     private fun showDeliveryData(delivery: Deliveries) {
         this.deliveries = delivery
@@ -73,6 +74,14 @@ class DeliveryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             imageVisibility = View.VISIBLE
         }
         iv_del.visibility = imageVisibility
+    }
+*/
+
+
+
+    fun bind(model :DeliveryAdapterViewModel)
+    {
+        deliveryViewItemBinding.viewModel=model
     }
 
 }

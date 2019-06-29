@@ -6,12 +6,12 @@
     <data>
 
         <variable
-            name="position"
-            type="java.lang.Integer" />
+            name="viewModel"
+            type="com.chaity.android.easy.move.ui.delivery.DeliveryAdapterViewModel" />
 
         <variable
-            name="viewModel"
-            type="com.chaity.android.easy.move.ui.delivery.DeliveriesViewModel" />
+            name="listener"
+            type="com.chaity.android.easy.move.listener.DeliveryItemClickListener" />
     </data>
 
 
@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:imgSrc="@{viewModel.imageUrl}"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
@@ -40,8 +41,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center_vertical"
-        android:text="sample text"
+        android:text="@{viewModel.description}"
         android:textSize="16sp"
+        android:onClick="@{(v)->listener.onItemClicked()}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_del"
