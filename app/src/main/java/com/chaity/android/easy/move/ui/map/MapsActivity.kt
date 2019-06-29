@@ -2,9 +2,9 @@ package com.chaity.android.easy.move.ui.map
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.chaity.android.easy.move.BuildConfig.BUNDLE_KEY_DELIVERY
 import com.chaity.android.easy.move.R
 import com.chaity.android.easy.move.model.Delivery
-import com.chaity.android.easy.move.utils.Constants.BUNDLE_KEY_DELIVERY
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback

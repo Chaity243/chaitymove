@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
+import com.chaity.android.easy.move.BuildConfig.API_LIST_SIZE
 import com.chaity.android.easy.move.api.DeliveryAPI
 import com.chaity.android.easy.move.db.DeliveryLocalCache
 import com.chaity.android.easy.move.model.Delivery
@@ -55,9 +56,9 @@ class DeliveryBoundaryCallback(
         if (isRequestInProgress.value!!) return
 
         isRequestInProgress.postValue(true)
-        getDeliveriesFRomService(api, offset,  Constants.API_LIST_SIZE, { repos ->
+        getDeliveriesFRomService(api, offset,API_LIST_SIZE, { repos ->
             cache.insert(repos) {
-                offset =offset+  Constants.API_LIST_SIZE
+                offset =offset+  API_LIST_SIZE
                 isRequestInProgress.postValue(false)
             }
         }, { error ->

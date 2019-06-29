@@ -19,6 +19,8 @@ android {
 
         /** The base URL of the API */
         buildConfigField "String", "BASE_URL", "\"https://mock-api-mobile.dev.lalamove.com\""
+        buildConfigField "Integer", "API_LIST_SIZE", "20"
+        buildConfigField "String", "BUNDLE_KEY_DELIVERY", "\"delivery\""
 
 
 

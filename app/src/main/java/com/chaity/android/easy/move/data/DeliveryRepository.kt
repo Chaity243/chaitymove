@@ -2,6 +2,7 @@ package com.chaity.android.easy.move.data
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
+import com.chaity.android.easy.move.BuildConfig.API_LIST_SIZE
 import com.chaity.android.easy.move.api.DeliveryAPI
 import com.chaity.android.easy.move.db.DeliveryLocalCache
 import com.chaity.android.easy.move.model.DeliveriesResult
@@ -39,7 +40,7 @@ class DeliveryRepository   @Inject constructor (
         loader=boundaryCallback.isRequestInProgress
 
         // Get the paged list
-        val data = LivePagedListBuilder(dataSourceFactory, Constants.API_LIST_SIZE)
+        val data = LivePagedListBuilder(dataSourceFactory,API_LIST_SIZE)
                 .setBoundaryCallback(boundaryCallback)
                 .build()
 

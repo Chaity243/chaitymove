@@ -10,12 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.chaity.android.easy.move.BuildConfig.BUNDLE_KEY_DELIVERY
 import com.chaity.android.easy.move.R
 import com.chaity.android.easy.move.listener.DeliveryItemClickListener
 import com.chaity.android.easy.move.model.Delivery
 import com.chaity.android.easy.move.ui.base.BaseActivity
 import com.chaity.android.easy.move.ui.map.MapsActivity
-import com.chaity.android.easy.move.utils.Constants.BUNDLE_KEY_DELIVERY
 import kotlinx.android.synthetic.main.activity_delivery.*
 import javax.inject.Inject
 
