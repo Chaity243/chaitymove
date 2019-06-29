@@ -24,7 +24,7 @@ private const val TAG = "DeliveryService"
  * @param onSuccess function that defines how to handle the list of repos received
  * @param onError function that defines how to handle request failure
  */
-fun searchRepos(
+fun getDeliveriesFRomService(
         service: DeliveryService,
         lastRequestedPage:Int,
         itemsPerPage: Int,

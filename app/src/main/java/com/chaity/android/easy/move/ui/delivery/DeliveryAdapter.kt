@@ -2,19 +2,25 @@
 
 package com.chaity.android.easy.move.ui.delivery
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.chaity.android.easy.move.R
 import com.chaity.android.easy.move.model.Deliveries
 
 /**
  * Adapter for the list of deliveries.
  */
-class DeliveryAdapter : PagedListAdapter<Deliveries, RecyclerView.ViewHolder>(DELIVERY_COMPARATOR) {
+class DeliveryAdapter : PagedListAdapter <Deliveries, RecyclerView.ViewHolder>(DELIVERY_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return DeliveryViewHolder.create(parent)
+
+        val view = LayoutInflater.from(parent.context)
+                .inflate(R.layout.delivery_view_item, parent, false)
+        return DeliveryViewHolder(view)
+
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

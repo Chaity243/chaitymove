@@ -75,11 +75,4 @@ class DeliveryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         iv_del.visibility = imageVisibility
     }
 
-    companion object {
-        fun create(parent: ViewGroup): DeliveryViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.delivery_view_item, parent, false)
-            return DeliveryViewHolder(view)
-        }
-    }
 }

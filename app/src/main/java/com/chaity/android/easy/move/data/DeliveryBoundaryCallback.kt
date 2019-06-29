@@ -1,5 +1,3 @@
-
-
 package com.chaity.android.easy.move.data
 
 import androidx.lifecycle.LiveData
@@ -8,7 +6,7 @@ import androidx.paging.PagedList
 import android.util.Log
 import com.chaity.android.easy.move.model.Deliveries
 import com.chaity.android.easy.move.api.DeliveryService
-import com.chaity.android.easy.move.api.searchRepos
+import com.chaity.android.easy.move.api.getDeliveriesFRomService
 import com.chaity.android.easy.move.db.DeliveryLocalCache
 import com.chaity.android.easy.move.utils.Constants
 
@@ -23,8 +21,8 @@ class DeliveryBoundaryCallback(
 ) : PagedList.BoundaryCallback<Deliveries>() {
 
 
-    // keep the last requested page. When the request is successful, increment the page number.
-    private var lastRequestedPage = 0
+    // keep the last requested no of items i.e. offset . When the request is successful, increment the  offset .
+    private var offset = 0
 
     private val _networkErrors = MutableLiveData<String>()
     // LiveData of network errors.
@@ -54,9 +52,9 @@ class DeliveryBoundaryCallback(
         if (isRequestInProgress) return
 
         isRequestInProgress = true
-        searchRepos(service, lastRequestedPage,  Constants.API_LIST_SIZE, { repos ->
+        getDeliveriesFRomService(service, offset,  Constants.API_LIST_SIZE, { repos ->
             cache.insert(repos) {
-                lastRequestedPage =lastRequestedPage+  Constants.API_LIST_SIZE
+                offset =offset+  Constants.API_LIST_SIZE
                 isRequestInProgress = false
             }
         }, { error ->

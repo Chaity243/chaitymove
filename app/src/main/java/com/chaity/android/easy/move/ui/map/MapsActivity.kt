@@ -19,7 +19,6 @@ import kotlinx.android.synthetic.main.delivery_view_item.*
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-    private lateinit var viewModel: MapsViewModel
     private lateinit var deliveryItem: Deliveries
 
     override fun onCreate(savedInstanceState: Bundle?) {
