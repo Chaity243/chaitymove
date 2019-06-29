@@ -6,7 +6,7 @@ import androidx.paging.PagedList
 import android.util.Log
 import com.chaity.android.easy.move.model.Deliveries
 import com.chaity.android.easy.move.api.DeliveryService
-import com.chaity.android.easy.move.api.getDeliveriesFRomService
+
 import com.chaity.android.easy.move.db.DeliveryLocalCache
 import com.chaity.android.easy.move.utils.Constants
 
@@ -30,7 +30,11 @@ class DeliveryBoundaryCallback(
         get() = _networkErrors
 
     // avoid triggering multiple requests in the same time
-    private var isRequestInProgress = false
+     var isRequestInProgress:  MutableLiveData<Boolean>  = MutableLiveData()
+
+    init{
+        isRequestInProgress.postValue(false)
+    }
 
     /**
      * Database returned 0 items. We should query the backend for more items.
@@ -44,22 +48,22 @@ class DeliveryBoundaryCallback(
      * When all items in the database were loaded, we need to query the backend for more items.
      */
     override fun onItemAtEndLoaded(itemAtEnd: Deliveries) {
-        Log.d("DelBoundCallback", "onItemAtEndLoaded")
+        Log.d("DelBoundaryCallback", "onItemAtEndLoaded")
         requestAndSaveData()
     }
 
     private fun requestAndSaveData() {
-        if (isRequestInProgress) return
+        if (isRequestInProgress.value!!) return
 
-        isRequestInProgress = true
+        isRequestInProgress.postValue(true)
         getDeliveriesFRomService(service, offset,  Constants.API_LIST_SIZE, { repos ->
             cache.insert(repos) {
                 offset =offset+  Constants.API_LIST_SIZE
-                isRequestInProgress = false
+                isRequestInProgress.postValue(false)
             }
         }, { error ->
             _networkErrors.postValue(error)
-            isRequestInProgress = false
+            isRequestInProgress.postValue(false)
         })
     }
 }
