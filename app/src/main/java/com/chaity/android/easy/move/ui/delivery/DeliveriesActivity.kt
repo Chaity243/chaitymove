@@ -5,9 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -26,8 +23,7 @@ class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(), DeliveryItemClic
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
-    @Inject
-    lateinit var adapter: DeliveryAdapter
+    var adapter =  DeliveryAdapter(this)
 
     private var viewModel: DeliveriesViewModel? = null
     private var showProgres: Boolean = false
