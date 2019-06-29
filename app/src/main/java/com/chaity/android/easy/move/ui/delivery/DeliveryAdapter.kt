@@ -1,5 +1,3 @@
-
-
 package com.chaity.android.easy.move.ui.delivery
 
 import android.view.LayoutInflater
@@ -9,12 +7,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.chaity.android.easy.move.databinding.DeliveryViewItemBinding
 import com.chaity.android.easy.move.listener.DeliveryItemClickListener
-import com.chaity.android.easy.move.model.Deliveries
+import com.chaity.android.easy.move.model.Delivery
 
 /**
- * Adapter for the list of deliveries.
+ * Adapter for the list of delivery Items
  */
-class DeliveryAdapter (deliveryItemClickListener : DeliveryItemClickListener): PagedListAdapter <Deliveries, RecyclerView.ViewHolder>(DELIVERY_COMPARATOR) {
+class DeliveryAdapter (deliveryItemClickListener : DeliveryItemClickListener): PagedListAdapter <Delivery, RecyclerView.ViewHolder>(DELIVERY_COMPARATOR) {
 
 
     lateinit var inflater: LayoutInflater
@@ -45,11 +43,11 @@ class DeliveryAdapter (deliveryItemClickListener : DeliveryItemClickListener): P
     }
 
     companion object {
-        private val DELIVERY_COMPARATOR = object : DiffUtil.ItemCallback<Deliveries>() {
-            override fun areItemsTheSame(oldItem: Deliveries, newItem: Deliveries): Boolean =
+        private val DELIVERY_COMPARATOR = object : DiffUtil.ItemCallback<Delivery>() {
+            override fun areItemsTheSame(oldItem: Delivery, newItem: Delivery): Boolean =
                     oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: Deliveries, newItem: Deliveries): Boolean =
+            override fun areContentsTheSame(oldItem: Delivery, newItem: Delivery): Boolean =
                     oldItem == newItem
         }
     }

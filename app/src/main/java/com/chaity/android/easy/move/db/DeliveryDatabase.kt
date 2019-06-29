@@ -3,12 +3,10 @@
 package com.chaity.android.easy.move.db
 
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
-import android.content.Context
 import androidx.room.TypeConverters
 import com.chaity.android.easy.move.appConverter.Converters
-import com.chaity.android.easy.move.model.Deliveries
+import com.chaity.android.easy.move.model.Delivery
 
 /**
  * Database schema that holds the list of deliveries
@@ -16,7 +14,7 @@ import com.chaity.android.easy.move.model.Deliveries
 
 @TypeConverters(Converters::class)
 @Database(
-        entities = [Deliveries::class],
+        entities = [Delivery::class],
         version = 1,
         exportSchema = false
 )

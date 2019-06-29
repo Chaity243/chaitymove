@@ -6,10 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 
 /**
- * DeliveriesResult from a search, which contains LiveData<List<Repo>> holding query data,
+ * Delivery API Result, which contains LiveData<List<Delivery>> holding delivery items list data,
  * and a LiveData<String> of network error state.
  */
 data class DeliveriesResult(
-        val data: LiveData<PagedList<Deliveries>>,
+        val data: LiveData<PagedList<Delivery>>,
         val networkErrors: LiveData<String>
 )

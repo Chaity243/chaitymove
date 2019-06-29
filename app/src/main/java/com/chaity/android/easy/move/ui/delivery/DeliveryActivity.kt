@@ -12,14 +12,14 @@ import androidx.paging.PagedList
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.chaity.android.easy.move.R
 import com.chaity.android.easy.move.listener.DeliveryItemClickListener
-import com.chaity.android.easy.move.model.Deliveries
+import com.chaity.android.easy.move.model.Delivery
 import com.chaity.android.easy.move.ui.base.BaseActivity
 import com.chaity.android.easy.move.ui.map.MapsActivity
 import com.chaity.android.easy.move.utils.Constants.BUNDLE_KEY_DELIVERY
 import kotlinx.android.synthetic.main.activity_delivery.*
 import javax.inject.Inject
 
-class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(), DeliveryItemClickListener {
+class DeliveryActivity : BaseActivity<DeliveriesViewModel>(), DeliveryItemClickListener {
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
@@ -57,7 +57,7 @@ class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(), DeliveryItemClic
 
     private fun initAdapter() {
         list.adapter = adapter
-        viewModel?.repos?.observe(this, Observer<PagedList<Deliveries>> {
+        viewModel?.repos?.observe(this, Observer<PagedList<Delivery>> {
             Log.d("Activity", "list: ${it?.size}")
             showEmptyList(it?.size == 0)
             adapter?.submitList(it)
@@ -92,7 +92,7 @@ class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(), DeliveryItemClic
     }
 
 
-    override fun onItemClicked(delivery: Deliveries) {
+    override fun onItemClicked(delivery: Delivery) {
         delivery?.let { delivery ->
             val intent = Intent(this, MapsActivity::class.java).putExtra(BUNDLE_KEY_DELIVERY, delivery)
             startActivity(intent)

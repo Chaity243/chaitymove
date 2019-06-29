@@ -1,6 +1,6 @@
 package com.chaity.android.easy.move.api
 
-import com.chaity.android.easy.move.model.Deliveries
+import com.chaity.android.easy.move.model.Delivery
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -27,7 +27,7 @@ interface DeliveryAPI {
             @Query("offset") offset: Int,
             @Query("limit") limit: Int
 
-    ): Call<List<Deliveries>>
+    ): Call<List<Delivery>>
 
 
 }

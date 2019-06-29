@@ -2,10 +2,8 @@ package com.chaity.android.easy.move.ui.map
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.chaity.android.easy.move.R
-import com.chaity.android.easy.move.model.Deliveries
+import com.chaity.android.easy.move.model.Delivery
 import com.chaity.android.easy.move.utils.Constants.BUNDLE_KEY_DELIVERY
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -19,7 +17,7 @@ import kotlinx.android.synthetic.main.delivery_view_item.*
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-    private lateinit var deliveryItem: Deliveries
+    private lateinit var deliveryItem: Delivery
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +39,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun getIntentData() {
-        deliveryItem = intent.extras.getParcelable<Deliveries>(BUNDLE_KEY_DELIVERY)
+        deliveryItem = intent.extras.getParcelable<Delivery>(BUNDLE_KEY_DELIVERY)
 
     }
 

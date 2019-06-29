@@ -2,13 +2,12 @@ package com.chaity.android.easy.move.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
 
 
 data class Location (
-       var lat :  Double,
-       var lng :  Double,
-       var address: String
+        var lat :  Double,
+        var lng :  Double,
+        var address: String
 ): Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readDouble(),

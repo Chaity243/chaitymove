@@ -2,7 +2,7 @@ package com.chaity.android.easy.move.data
 
 import android.util.Log
 import com.chaity.android.easy.move.api.DeliveryAPI
-import com.chaity.android.easy.move.model.Deliveries
+import com.chaity.android.easy.move.model.Delivery
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -13,7 +13,7 @@ fun getDeliveriesFRomService(
         api: DeliveryAPI,
         lastRequestedPage:Int,
         itemsPerPage: Int,
-        onSuccess: (repos: List<Deliveries>) -> Unit,
+        onSuccess: (repos: List<Delivery>) -> Unit,
         onError: (error: String) -> Unit
 ) {
     Log.d(TAG, "itemsPerPage: $itemsPerPage")
@@ -21,15 +21,15 @@ fun getDeliveriesFRomService(
 
 
     api.deliveryAPI( lastRequestedPage,itemsPerPage).enqueue(
-            object : Callback<List<Deliveries>> {
-                override fun onFailure(call: Call<List<Deliveries>>?, t: Throwable) {
+            object : Callback<List<Delivery>> {
+                override fun onFailure(call: Call<List<Delivery>>?, t: Throwable) {
                     Log.d(TAG, "fail to get data")
                     onError(t.message ?: "unknown error")
                 }
 
                 override fun onResponse(
-                        call: Call<List<Deliveries>>?,
-                        response: Response<List<Deliveries>>
+                        call: Call<List<Delivery>>?,
+                        response: Response<List<Delivery>>
                 ) {
                     Log.d(TAG, "got a response $response")
                     if (response.isSuccessful) {

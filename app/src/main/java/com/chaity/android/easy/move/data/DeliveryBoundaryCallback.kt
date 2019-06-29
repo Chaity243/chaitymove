@@ -1,13 +1,12 @@
 package com.chaity.android.easy.move.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
-import android.util.Log
-import com.chaity.android.easy.move.model.Deliveries
 import com.chaity.android.easy.move.api.DeliveryAPI
-
 import com.chaity.android.easy.move.db.DeliveryLocalCache
+import com.chaity.android.easy.move.model.Delivery
 import com.chaity.android.easy.move.utils.Constants
 
 /**
@@ -18,7 +17,7 @@ class DeliveryBoundaryCallback(
 
         private val api: DeliveryAPI,
         private val cache: DeliveryLocalCache
-) : PagedList.BoundaryCallback<Deliveries>() {
+) : PagedList.BoundaryCallback<Delivery>() {
 
 
     // keep the last requested no of items i.e. offset . When the request is successful, increment the  offset .
@@ -30,7 +29,7 @@ class DeliveryBoundaryCallback(
         get() = _networkErrors
 
     // avoid triggering multiple requests in the same time
-     var isRequestInProgress:  MutableLiveData<Boolean>  = MutableLiveData()
+    var isRequestInProgress:  MutableLiveData<Boolean>  = MutableLiveData()
 
     init{
         isRequestInProgress.postValue(false)
@@ -45,9 +44,9 @@ class DeliveryBoundaryCallback(
     }
 
     /**
-     * When all items in the database were loaded, we need to query the backend for more items.
+     * When all items from the database were loaded, we need to query the backend for more items.
      */
-    override fun onItemAtEndLoaded(itemAtEnd: Deliveries) {
+    override fun onItemAtEndLoaded(itemAtEnd: Delivery) {
         Log.d("DelBoundaryCallback", "onItemAtEndLoaded")
         requestAndSaveData()
     }

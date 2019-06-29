@@ -8,15 +8,15 @@ import com.google.gson.annotations.SerializedName
 
 
 /**
- * Class which provides a model for Deliveries
+ * Class which provides a model for Delivery
  * @constructor Sets all properties of the post
- * @property id the unique identifier of the deliveries
- * @property description the description details of the deliveries
- * @property location location of deliveries
+ * @property id the unique identifier of the delivery item
+ * @property description the description details of the delivery item
+ * @property location location of delivery item
  */
 @Entity
 
-data class Deliveries (
+data class Delivery (
         @SerializedName("id")     @field:PrimaryKey  val id: Int,
         @SerializedName("description")      val description: String,
         @SerializedName("imageUrl")    val imageUrl: String,
@@ -41,12 +41,12 @@ data class Deliveries (
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Deliveries> {
-        override fun createFromParcel(parcel: Parcel): Deliveries {
-            return Deliveries(parcel)
+    companion object CREATOR : Parcelable.Creator<Delivery> {
+        override fun createFromParcel(parcel: Parcel): Delivery {
+            return Delivery(parcel)
         }
 
-        override fun newArray(size: Int): Array<Deliveries?> {
+        override fun newArray(size: Int): Array<Delivery?> {
             return arrayOfNulls(size)
         }
     }
