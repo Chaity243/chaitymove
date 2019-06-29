@@ -8,15 +8,18 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.chaity.android.easy.move.databinding.DeliveryViewItemBinding
+import com.chaity.android.easy.move.listener.DeliveryItemClickListener
 import com.chaity.android.easy.move.model.Deliveries
 
 /**
  * Adapter for the list of deliveries.
  */
-class DeliveryAdapter : PagedListAdapter <Deliveries, RecyclerView.ViewHolder>(DELIVERY_COMPARATOR) {
+class DeliveryAdapter (deliveryItemClickListener : DeliveryItemClickListener): PagedListAdapter <Deliveries, RecyclerView.ViewHolder>(DELIVERY_COMPARATOR) {
 
 
     lateinit var inflater: LayoutInflater
+    val deliveryItemClickListener=deliveryItemClickListener
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         inflater= LayoutInflater.from(parent.context)
@@ -31,6 +34,13 @@ class DeliveryAdapter : PagedListAdapter <Deliveries, RecyclerView.ViewHolder>(D
             var deliveryItem  =  DeliveryAdapterViewModel(repoItem.id
                     ,repoItem.description,repoItem.imageUrl)
             (holder as DeliveryViewHolder).bind(deliveryItem)
+
+
+            holder.itemView.setOnClickListener()
+            {
+                deliveryItemClickListener.onItemClicked(repoItem)
+            }
+
         }
     }
 

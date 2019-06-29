@@ -9,45 +9,41 @@
             name="viewModel"
             type="com.chaity.android.easy.move.ui.delivery.DeliveryAdapterViewModel" />
 
-        <variable
-            name="listener"
-            type="com.chaity.android.easy.move.listener.DeliveryItemClickListener" />
     </data>
 
 
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingHorizontal="@dimen/row_item_margin_horizontal"
-    android:padding="@dimen/row_item_margin_vertical"
-    tools:ignore="UnusedAttribute">
-
-    <ImageView
-        android:id="@+id/iv_del"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:imgSrc="@{viewModel.imageUrl}"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:paddingHorizontal="@dimen/row_item_margin_horizontal"
+        android:padding="@dimen/row_item_margin_vertical"
+        tools:ignore="UnusedAttribute">
 
-    <TextView
-        android:id="@+id/tv_del"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center_vertical"
-        android:text="@{viewModel.description}"
-        android:textSize="16sp"
-        android:onClick="@{(v)->listener.onItemClicked()}"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_del"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/iv_del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:imgSrc="@{viewModel.imageUrl}"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_del"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:text="@{viewModel.description}"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_del"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,5 +1,6 @@
 package com.chaity.android.easy.move.ui.delivery
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -13,18 +14,23 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.chaity.android.easy.move.R
+import com.chaity.android.easy.move.listener.DeliveryItemClickListener
 import com.chaity.android.easy.move.model.Deliveries
 import com.chaity.android.easy.move.ui.base.BaseActivity
+import com.chaity.android.easy.move.ui.map.MapsActivity
+import com.chaity.android.easy.move.utils.Constants.BUNDLE_KEY_DELIVERY
 import kotlinx.android.synthetic.main.activity_delivery.*
 import javax.inject.Inject
 
-class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(){
+class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(), DeliveryItemClickListener {
 
-    @Inject lateinit  var factory: ViewModelProvider.Factory
-    @Inject lateinit var adapter:DeliveryAdapter
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
+    @Inject
+    lateinit var adapter: DeliveryAdapter
 
     private var viewModel: DeliveriesViewModel? = null
-    private var showProgres:Boolean = false
+    private var showProgres: Boolean = false
 
 
     override fun getViewModel(): DeliveriesViewModel {
@@ -36,12 +42,12 @@ class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(){
     }
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_delivery)
-        setupBindings(savedInstanceState)
 
+        // get the view model
+        getViewModel()
 
 
         // add dividers between RecyclerView's row items
@@ -49,16 +55,6 @@ class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(){
         list.addItemDecoration(decoration)
 
         initAdapter()
-
-    }
-
-    private fun setupBindings(savedInstanceState: Bundle?) {
-        val activityBinding = DataBindingUtil.setContentView<ViewDataBinding>(this, R.layout.activity_delivery)
-
-        // get the view model
-        getViewModel()
-
-
 
     }
 
@@ -75,19 +71,16 @@ class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(){
         })
 
         viewModel?.loader?.observe(this, Observer {
-            showProgres=it
+            showProgres = it
 
             showHideProgress(showProgres)
         })
     }
 
     private fun showHideProgress(showProgres: Boolean?) {
-        if(showProgres!!)
-        {
-            progressBar.visibility=View.VISIBLE
-        }
-        else  progressBar.visibility=View.GONE
-
+        if (showProgres!!) {
+            progressBar.visibility = View.VISIBLE
+        } else progressBar.visibility = View.GONE
 
 
     }
@@ -102,4 +95,12 @@ class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(){
         }
     }
 
+
+    override fun onItemClicked(delivery: Deliveries) {
+        delivery?.let { delivery ->
+            val intent = Intent(this, MapsActivity::class.java).putExtra(BUNDLE_KEY_DELIVERY, delivery)
+            startActivity(intent)
+        }
+
+    }
 }
