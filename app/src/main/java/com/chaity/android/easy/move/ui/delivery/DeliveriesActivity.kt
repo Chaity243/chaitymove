@@ -24,8 +24,7 @@ class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(){
     @Inject lateinit var adapter:DeliveryAdapter
 
     private var viewModel: DeliveriesViewModel? = null
-
-
+    private var showProgres:Boolean = false
 
 
     override fun getViewModel(): DeliveriesViewModel {
@@ -74,6 +73,23 @@ class DeliveriesActivity : BaseActivity<DeliveriesViewModel>(){
         viewModel?.networkErrors?.observe(this, Observer<String> {
             Toast.makeText(this, "\uD83D\uDE28 Wooops $it", Toast.LENGTH_LONG).show()
         })
+
+        viewModel?.loader?.observe(this, Observer {
+            showProgres=it
+
+            showHideProgress(showProgres)
+        })
+    }
+
+    private fun showHideProgress(showProgres: Boolean?) {
+        if(showProgres!!)
+        {
+            progressBar.visibility=View.VISIBLE
+        }
+        else  progressBar.visibility=View.GONE
+
+
+
     }
 
     private fun showEmptyList(show: Boolean) {
