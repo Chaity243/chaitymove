@@ -18,12 +18,12 @@ import retrofit2.http.Query
 /**
  * get delivery list  API communication setup via Retrofit.
  */
-interface DeliveryService {
+interface DeliveryAPI {
     /**
      * Get delivery list
      */
     @GET("/deliveries")
-    fun searchRepos(
+    fun deliveryAPI(
             @Query("offset") offset: Int,
             @Query("limit") limit: Int
 

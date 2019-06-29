@@ -1,16 +1,16 @@
 package com.chaity.android.easy.move.data
 
 import android.util.Log
-import com.chaity.android.easy.move.api.DeliveryService
+import com.chaity.android.easy.move.api.DeliveryAPI
 import com.chaity.android.easy.move.model.Deliveries
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-private const val TAG = "DeliveryService"
+private const val TAG = "DeliveryAPI"
 
 fun getDeliveriesFRomService(
-        service: DeliveryService,
+        api: DeliveryAPI,
         lastRequestedPage:Int,
         itemsPerPage: Int,
         onSuccess: (repos: List<Deliveries>) -> Unit,
@@ -20,7 +20,7 @@ fun getDeliveriesFRomService(
 
 
 
-    service.searchRepos( lastRequestedPage,itemsPerPage).enqueue(
+    api.deliveryAPI( lastRequestedPage,itemsPerPage).enqueue(
             object : Callback<List<Deliveries>> {
                 override fun onFailure(call: Call<List<Deliveries>>?, t: Throwable) {
                     Log.d(TAG, "fail to get data")

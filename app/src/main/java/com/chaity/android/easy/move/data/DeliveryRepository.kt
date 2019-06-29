@@ -1,17 +1,11 @@
 package com.chaity.android.easy.move.data
 
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
-import com.chaity.android.easy.move.api.DeliveryService
+import com.chaity.android.easy.move.api.DeliveryAPI
 import com.chaity.android.easy.move.db.DeliveryLocalCache
-import com.chaity.android.easy.move.model.Deliveries
 import com.chaity.android.easy.move.model.DeliveriesResult
 import com.chaity.android.easy.move.utils.Constants
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import javax.inject.Inject
 
 
@@ -22,7 +16,7 @@ import javax.inject.Inject
  * Repository class that works with local and remote data sources.
  */
 class DeliveryRepository   @Inject constructor (
-        private val service: DeliveryService,
+        private val api: DeliveryAPI,
         private val cache: DeliveryLocalCache
 ) {
 
@@ -40,7 +34,7 @@ class DeliveryRepository   @Inject constructor (
         // every new query creates a new BoundaryCallback
         // The BoundaryCallback will observe when the user reaches to the edges of
         // the list and update the database with extra data
-        val boundaryCallback = DeliveryBoundaryCallback( service, cache)
+        val boundaryCallback = DeliveryBoundaryCallback( api, cache)
         val networkErrors = boundaryCallback.networkErrors
         loader=boundaryCallback.isRequestInProgress
 

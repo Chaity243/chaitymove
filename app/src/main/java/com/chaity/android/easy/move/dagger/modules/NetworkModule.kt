@@ -2,7 +2,7 @@ package com.chaity.android.easy.move.dagger.modules
 
 
 import com.chaity.android.easy.move.BuildConfig
-import com.chaity.android.easy.move.api.DeliveryService
+import com.chaity.android.easy.move.api.DeliveryAPI
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -48,8 +48,8 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    internal fun provideApiService(retrofit: Retrofit): DeliveryService {
-        return retrofit.create(DeliveryService::class.java)
+    internal fun provideApiService(retrofit: Retrofit): DeliveryAPI {
+        return retrofit.create(DeliveryAPI::class.java)
     }
 
 }
